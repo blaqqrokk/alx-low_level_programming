@@ -1,57 +1,47 @@
-#include <stdio.h>
-		
-#include <stdlib.h>
-		
 #include "main.h"
-		
+#include <stdlib.h>
+#include <stdio.h>
+
 /**
-		
- * _strdup - duplicate to new memory space location
-		
- * @str: char
-		
- * Return: 0
-		
+ * str_concat - concatenates two strings.
+ * @s1: first string
+ * @s2: second string
+ *
+ * Return: a pointer to a newly allocated space in memory which
+ * contains the contents of s1, followed by the contents of s2,
+ * and null terminated. NULL on failure
  */
-		
-char *_strdup(char *str)
-		
+char *str_concat(char *s1, char *s2)
 {
-		
-	char *aaa;
-		
-	int i, r = 0;
-		
+	int i, j, len1, len2, len;
+	char *result;
 
-		
-	if (str == NULL)
-		
+	len1 = len2 = 0;
+
+	if (s1 != NULL)
+	{
+		i = 0;
+		while (s1[i++] != '\0')
+			len1++;
+	}
+
+	if (s2 != NULL)
+	{
+		i = 0;
+		while (s2[i++] != '\0')
+			len2++;
+	}
+
+	len = len1 + len2;
+	result = (char *)malloc(sizeof(char) * (len + 1));
+	if (result == NULL)
 		return (NULL);
-		
-	i = 0;
-		
-	while (str[i] != '\0')
-		
-		i++;
-		
 
-		
-	aaa = malloc(sizeof(char) * (i + 1));
-		
+	for (i = 0; i < len1; i++)
+		result[i] = s1[i];
+	for (j = 0; j < len2; j++, i++)
+		result[i] = s2[j];
+	result[len] = '\0';
 
-		
-	if (aaa == NULL)
-		
-		return (NULL);
-		
-
-		
-	for (r = 0; str[r]; r++)
-		
-		aaa[r] = str[r];
-		
-
-		
-	return (aaa);
-		
+	return (result);
 }
